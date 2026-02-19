@@ -64,5 +64,28 @@ def batch_test_examples(model):
         print("-" * 100)
 
 
+def interactive_mode(model):
+    """대화형 모드 테스트"""
+    while True:
+        text = input("텍스트를 입력해주세요: ").strip()
+
+        if text.lower() in ["quit", "exit", "종료"]:
+            print("테스트를 종료합니다.")
+            break
+
+        if not text:
+            print("텍스트를 입력해주세요.")
+            continue
+
+        result, confidence, decision_score = predict_text(model, text)
+        print("-" * 100)
+        print(f"예측 결과: {result}")
+        print(f"신뢰도: {confidence:.4f}")
+        print(f"원본 점수: {decision_score:.4f}")
+        print("-" * 100)
+
+
 if __name__ == "__main__":
     batch_test_examples(model)
+    print("\n" + "=" * 20 + " 대화형 모드 시작 " + "=" * 20)
+    interactive_mode(model)
